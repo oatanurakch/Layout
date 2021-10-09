@@ -1,0 +1,21 @@
+[
+    {
+        "title" : "What is Computer ?",
+        "subtitle" : "คอมพิวเตอร์คืออุปกรณ์ในการคำนวณและทำงานอื่น ๆ",
+        "image_url" : "https://raw.githubusercontent.com/oatanurakch/BasicFlutterAPI/main/computer.jpg",
+        "detail" : "เครื่องคำนวณอิเล็กทรอนิกส์โดยใช้วิธีทางคณิตศาสตร์ประกอบด้วยฮาร์ดแวร์ (ส่วนตัวเครื่องและอุปกรณ์) และซอฟต์แวร์ (ส่วนชุดคำสั่ง หรือโปรแกรมที่สั่งให้คอมพิวเตอร์ทำงาน) สามารถทำงานคำนวณผล และเปรียบเทียบค่าตามชุดคำสั่งด้วยความเร็วสูงอย่างต่อเนื่อง และอัตโนมัติ."
+    },
+    {
+        "title" : "What is Python ?",
+        "subtitle" : "เป็นภาษาเขียนโปรแกรมชนิดหนึ่ง",
+        "image_url" : "https://raw.githubusercontent.com/oatanurakch/BasicFlutterAPI/main/Coding.jpg",
+        "detail" : "ภาษาไพธอน (Python) เป็นภาษาการเขียนโปรแกรมระดับสูง ที่นำข้อดีของภาษาต่างๆ มารวมไว้ด้วยกัน ถูกออกแบบมาให้เรียนรู้ได้ง่าย และมีไวยากรณ์ที่ช่วยให้เขียนโค้ดสั้นกว่าภาษาอื่นๆ"
+    },
+    {
+        "title" : "What is Dart ?",
+        "subtitle" : "มาเริ่มรู้จัก Flutter กันก่อน",
+        "image_url" : "https://raw.githubusercontent.com/oatanurakch/BasicFlutterAPI/main/Flutter.jpg",
+        "detail" : "Cross-Platform Framework ที่ใช้ในการพัฒนา Native Mobile Application (Android/iOS) พัฒนาโดยบริษัท Google Inc. โดยใช้ภาษา Dart ในการพัฒนา ที่มีความคล้ายกับภาษา C# และ Java."
+    }
+    
+]
