@@ -3,23 +3,43 @@ import 'package:http/http.dart' as http;
 import 'dart:async';
 import 'dart:convert';
 
-class AddPage extends StatefulWidget {
-  const AddPage({Key? key}) : super(key: key);
+// การแก้ไขคำที่เหมือนกันให้ Double Click ที่คำที่ต้องการแก้ จากนั้นกด CTRL + D เพื่อเลือกคำที่เหมือนกัน
+class UpdatePage extends StatefulWidget {
+  final v1, v2, v3;
+  // this. เปรียบเสมือน Contructor ใน Python
+  const UpdatePage(this.v1, this.v2, this.v3);
 
   @override
-  _AddPageState createState() => _AddPageState();
+  _UpdatePageState createState() => _UpdatePageState();
 }
 
-class _AddPageState extends State<AddPage> {
-  // ประกาศตัวแปรไว้รอเก็บข้อมูล
+class _UpdatePageState extends State<UpdatePage> {
+  var _v1, _v2, _v3;
   TextEditingController todo_title = TextEditingController();
   TextEditingController todo_detail = TextEditingController();
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    _v1 = widget.v1; // id
+    _v2 = widget.v2; // title
+    _v3 = widget.v3; // detail
+    todo_title.text = _v2;
+    todo_detail.text = _v3;
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('เพิ่มรายการใหม่ให้กับ Database'),
+        title: Text('แก้ไขข้อมูล'),
+        actions: [
+          IconButton(
+            onPressed: () {},
+            icon: Icon(Icons.delete),
+          )
+        ],
       ),
       body: Padding(
         padding: const EdgeInsets.all(10),
@@ -62,7 +82,7 @@ class _AddPageState extends State<AddPage> {
                   });
                 },
                 child: (Text(
-                  "เพิ่มรายการ",
+                  "แก้ไขข้อมูล",
                   style: TextStyle(fontSize: 20),
                 )),
                 style: ButtonStyle(
@@ -83,9 +103,10 @@ class _AddPageState extends State<AddPage> {
 
   Future postTodo() async {
     // var url = Uri.http('192.168.0.6:8000', '/api/post-todolist');
-    var url = Uri.http('192.168.0.6:8000', '/api/post-todolist');
-    Map<String, String> header = {"Content-type" : "application/json"};
-    String jsondata = '{"title" : "${todo_title.text}", "detail" : "${todo_detail.text}"}';
+    var url = Uri.https('8b6c-171-101-98-85.ngrok.io', '/api/post-todolist');
+    Map<String, String> header = {"Content-type": "application/json"};
+    String jsondata =
+        '{"title" : "${todo_title.text}", "detail" : "${todo_detail.text}"}';
     var response = await http.post(url, headers: header, body: jsondata);
     print('---------------------');
     print(response.body);
