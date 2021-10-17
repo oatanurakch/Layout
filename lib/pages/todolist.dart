@@ -34,7 +34,11 @@ class _TodolistState extends State<Todolist> {
             MaterialPageRoute(
               builder: (context) => AddPage(),
             ),
-          );
+          ).then((value) {
+            setState(() {
+              getTodolist();
+            });
+          });
         },
         child: Icon(Icons.add),
       ),
@@ -70,7 +74,18 @@ class _TodolistState extends State<Todolist> {
                     todolistitems[index]['detail'],
                   ),
                 ),
-              );
+              ).then((value) {
+                setState(() {
+                  print(value);
+                  if (value == 'delete') {
+                    final snackBar = SnackBar(
+                      content: const Text('Delete Complete'),
+                    );
+                    ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                  }
+                  getTodolist();
+                });
+              });
             },
           ),
         );
@@ -80,7 +95,7 @@ class _TodolistState extends State<Todolist> {
 
   Future<void> getTodolist() async {
     List alltodo = [];
-    var url = Uri.http('192.168.0.6:8000', 'api/get-all-todolist');
+    var url = Uri.http('192.168.1.67:8000', 'api/get-all-todolist');
     var response = await http.get(url);
     // var result = json.decode(response.body);
     var result = utf8.decode(response.bodyBytes);

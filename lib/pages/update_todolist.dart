@@ -36,8 +36,14 @@ class _UpdatePageState extends State<UpdatePage> {
         title: Text('แก้ไขข้อมูล'),
         actions: [
           IconButton(
-            onPressed: () {},
-            icon: Icon(Icons.delete),
+            onPressed: () {
+              DeleteTodo();
+              // Navigator.pop(context);
+            },
+            icon: Icon(
+              Icons.delete,
+              color: Colors.red,
+            ),
           )
         ],
       ),
@@ -74,12 +80,7 @@ class _UpdatePageState extends State<UpdatePage> {
                   print('--------------------');
                   print('title: ${todo_title.text}');
                   print('detail: ${todo_detail.text}');
-                  postTodo();
-                  // หลังจาก POST เสร็จแล้วให้ทำการ Clear ข้อมูลโดยการใช้ setState()
-                  setState(() {
-                    todo_title.clear();
-                    todo_detail.clear();
-                  });
+                  UpdateTodo();
                 },
                 child: (Text(
                   "แก้ไขข้อมูล",
@@ -101,14 +102,26 @@ class _UpdatePageState extends State<UpdatePage> {
     );
   }
 
-  Future postTodo() async {
-    // var url = Uri.http('192.168.0.6:8000', '/api/post-todolist');
-    var url = Uri.https('8b6c-171-101-98-85.ngrok.io', '/api/post-todolist');
+  Future UpdateTodo() async {
+    var url = Uri.http('192.168.1.67:8000', '/api/update-todolist/$_v1');
+    // var url = Uri.http('8b6c-171-101-98-85.ngrok.io', '/api/post-todolist');
     Map<String, String> header = {"Content-type": "application/json"};
     String jsondata =
         '{"title" : "${todo_title.text}", "detail" : "${todo_detail.text}"}';
-    var response = await http.post(url, headers: header, body: jsondata);
+    var response = await http.put(url, headers: header, body: jsondata);
     print('---------------------');
     print(response.body);
+  }
+
+  Future DeleteTodo() async {
+    var url = Uri.http('192.168.1.67:8000', '/api/delete-todolist/$_v1');
+    // var url = Uri.http('8b6c-171-101-98-85.ngrok.io', '/api/post-todolist');
+    Map<String, String> header = {"Content-type": "application/json"};
+    var response = await http.delete(url, headers: header);
+    print('---------------------');
+    print(response.body);
+    if(response.statusCode == 200){
+      Navigator.pop(context, 'delete');
+    }
   }
 }
